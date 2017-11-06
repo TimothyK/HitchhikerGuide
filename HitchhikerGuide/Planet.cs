@@ -5,7 +5,8 @@ using System.Text;
 
 namespace HitchhikerGuide
 {
-    class Planet
+    [Serializable]
+    public class Planet
     {
         public string Name { get; set; }
         public bool HasAtmosphere { get; set; }

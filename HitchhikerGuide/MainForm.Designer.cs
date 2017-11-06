@@ -35,14 +35,14 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.tlpPlanet = new System.Windows.Forms.TableLayoutPanel();
-            this.chkHasAtmosphere = new System.Windows.Forms.CheckBox();
-            this.lblSkyColour = new System.Windows.Forms.Label();
             this.cboSkyColour = new System.Windows.Forms.ComboBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.lblNotes = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
-            this.btnSave = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblSkyColour = new System.Windows.Forms.Label();
+            this.chkHasAtmosphere = new System.Windows.Forms.CheckBox();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splMain)).BeginInit();
             this.splMain.Panel1.SuspendLayout();
             this.splMain.Panel2.SuspendLayout();
@@ -160,29 +160,6 @@
             this.tlpPlanet.Size = new System.Drawing.Size(338, 407);
             this.tlpPlanet.TabIndex = 0;
             // 
-            // chkHasAtmosphere
-            // 
-            this.chkHasAtmosphere.AutoSize = true;
-            this.chkHasAtmosphere.Checked = true;
-            this.chkHasAtmosphere.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkHasAtmosphere.Location = new System.Drawing.Point(80, 29);
-            this.chkHasAtmosphere.Name = "chkHasAtmosphere";
-            this.chkHasAtmosphere.Size = new System.Drawing.Size(104, 17);
-            this.chkHasAtmosphere.TabIndex = 2;
-            this.chkHasAtmosphere.Text = "Has Atmosphere";
-            this.chkHasAtmosphere.UseVisualStyleBackColor = true;
-            this.chkHasAtmosphere.CheckedChanged += new System.EventHandler(this.chkHasAtmosphere_CheckedChanged);
-            // 
-            // lblSkyColour
-            // 
-            this.lblSkyColour.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblSkyColour.AutoSize = true;
-            this.lblSkyColour.Location = new System.Drawing.Point(3, 56);
-            this.lblSkyColour.Name = "lblSkyColour";
-            this.lblSkyColour.Size = new System.Drawing.Size(61, 13);
-            this.lblSkyColour.TabIndex = 3;
-            this.lblSkyColour.Text = "Sky Colour:";
-            // 
             // cboSkyColour
             // 
             this.cboSkyColour.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -197,6 +174,16 @@
             this.cboSkyColour.TabIndex = 4;
             this.cboSkyColour.SelectedIndexChanged += new System.EventHandler(this.cboSkyColour_SelectedIndexChanged);
             this.cboSkyColour.TextChanged += new System.EventHandler(this.cboSkyColour_TextChanged);
+            // 
+            // txtName
+            // 
+            this.txtName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtName.Location = new System.Drawing.Point(80, 3);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(255, 20);
+            this.txtName.TabIndex = 1;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
+            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
             // 
             // lblNotes
             // 
@@ -220,16 +207,6 @@
             this.txtNotes.TabIndex = 6;
             this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
             // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSave.Location = new System.Drawing.Point(260, 381);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "&Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            // 
             // lblName
             // 
             this.lblName.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -240,15 +217,39 @@
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Planet Name:";
             // 
-            // txtName
+            // lblSkyColour
             // 
-            this.txtName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtName.Location = new System.Drawing.Point(80, 3);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(255, 20);
-            this.txtName.TabIndex = 1;
-            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
-            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
+            this.lblSkyColour.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblSkyColour.AutoSize = true;
+            this.lblSkyColour.Location = new System.Drawing.Point(3, 56);
+            this.lblSkyColour.Name = "lblSkyColour";
+            this.lblSkyColour.Size = new System.Drawing.Size(61, 13);
+            this.lblSkyColour.TabIndex = 3;
+            this.lblSkyColour.Text = "Sky Colour:";
+            // 
+            // chkHasAtmosphere
+            // 
+            this.chkHasAtmosphere.AutoSize = true;
+            this.chkHasAtmosphere.Checked = true;
+            this.chkHasAtmosphere.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkHasAtmosphere.Location = new System.Drawing.Point(80, 29);
+            this.chkHasAtmosphere.Name = "chkHasAtmosphere";
+            this.chkHasAtmosphere.Size = new System.Drawing.Size(104, 17);
+            this.chkHasAtmosphere.TabIndex = 2;
+            this.chkHasAtmosphere.Text = "Has Atmosphere";
+            this.chkHasAtmosphere.UseVisualStyleBackColor = true;
+            this.chkHasAtmosphere.CheckedChanged += new System.EventHandler(this.chkHasAtmosphere_CheckedChanged);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnSave.Location = new System.Drawing.Point(260, 381);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 7;
+            this.btnSave.Text = "&Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // MainForm
             // 
@@ -259,6 +260,7 @@
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Hitchhiker\'s Guide";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.splMain.Panel1.ResumeLayout(false);
             this.splMain.Panel1.PerformLayout();
             this.splMain.Panel2.ResumeLayout(false);
