@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.IO.IsolatedStorage;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HitchhikerGuide
@@ -17,6 +12,51 @@ namespace HitchhikerGuide
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            LoadAllFiles();
+        }
+
+        private void LoadAllFiles()
+        {
+            using (var isoStore = GetStore())
+            {
+                foreach (var fileName in isoStore.GetFileNames())
+                {
+                    ReadFile(fileName, isoStore);
+                }
+            }
+            
+        }
+
+        private static IsolatedStorageFile GetStore()
+        {
+            return IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain, null, null);
+        }
+
+        private void ReadFile(string fileName, IsolatedStorageFile isoStore)
+        {
+            try
+            {
+                using (var fileStream = new IsolatedStorageFileStream(fileName, FileMode.Open, isoStore))
+                {
+                    using (var reader = new StreamReader(fileStream))
+                    {
+                        var serializedData = reader.ReadToEnd();
+                        var planet = serializedData.Deserialize<Planet>();
+                        lstNavigation.Items.Add(planet);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Couldn't read file " + fileName + ".  " + ex.Message,"Couldn't Read File", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+
         }
 
         private void lstNavigation_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,6 +111,15 @@ namespace HitchhikerGuide
             planet.Name = txtName.Text;
         }
 
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtName.Text == "Pluto")
+            {
+                MessageBox.Show("Pluto is not a planet", "Bad Planet Name", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Cancel = true;                
+            }
+        }
+
         private void txtName_Leave(object sender, EventArgs e)
         {
             RefreshNavigationList();
@@ -87,6 +136,9 @@ namespace HitchhikerGuide
         {
             var planet = (Planet)lstNavigation.SelectedItem;
             planet.HasAtmosphere = chkHasAtmosphere.Checked;
+
+            lblSkyColour.Enabled = chkHasAtmosphere.Checked;
+            cboSkyColour.Enabled = chkHasAtmosphere.Checked;
         }
 
         private void cboSkyColour_SelectedIndexChanged(object sender, EventArgs e)
@@ -114,51 +166,6 @@ namespace HitchhikerGuide
             using (var fileStream = isoStore.CreateFile(planet.Name + ".xml"))
             using (var writer = new StreamWriter(fileStream))
                 writer.WriteLine(planet.ToSerializedXml());
-        }
-
-        private void LoadAllFiles()
-        {
-            using (var isoStore = GetStore())
-            {
-                foreach (var fileName in isoStore.GetFileNames())
-                {
-                    ReadFile(fileName, isoStore);
-                }
-            }
-            
-        }
-
-        private static IsolatedStorageFile GetStore()
-        {
-            return IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain, null, null);
-        }
-
-        private void ReadFile(string fileName, IsolatedStorageFile isoStore)
-        {
-            try
-            {
-                using (var fileStream = new IsolatedStorageFileStream(fileName, FileMode.Open, isoStore))
-                {
-                    using (var reader = new StreamReader(fileStream))
-                    {
-                        var serializedData = reader.ReadToEnd();
-                        var planet = serializedData.Deserialize<Planet>();
-                        lstNavigation.Items.Add(planet);
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Couldn't read file " + fileName + ".  " + ex.Message,"Couldn't Read File", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-
-
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            LoadAllFiles();
         }
     }
 }
