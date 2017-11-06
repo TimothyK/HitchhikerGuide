@@ -94,6 +94,7 @@
             this.lstNavigation.Name = "lstNavigation";
             this.lstNavigation.Size = new System.Drawing.Size(164, 366);
             this.lstNavigation.TabIndex = 0;
+            this.lstNavigation.SelectedIndexChanged += new System.EventHandler(this.lstNavigation_SelectedIndexChanged);
             // 
             // tlpButtons
             // 
@@ -118,8 +119,9 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "Add";
+            this.btnAdd.Text = "&Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
@@ -127,8 +129,9 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 1;
-            this.btnDelete.Text = "Delete";
+            this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // tlpPlanet
             // 
@@ -144,6 +147,7 @@
             this.tlpPlanet.Controls.Add(this.chkHasAtmosphere, 1, 1);
             this.tlpPlanet.Controls.Add(this.btnSave, 1, 5);
             this.tlpPlanet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpPlanet.Enabled = false;
             this.tlpPlanet.Location = new System.Drawing.Point(0, 0);
             this.tlpPlanet.Name = "tlpPlanet";
             this.tlpPlanet.RowCount = 6;
@@ -167,6 +171,7 @@
             this.chkHasAtmosphere.TabIndex = 2;
             this.chkHasAtmosphere.Text = "Has Atmosphere";
             this.chkHasAtmosphere.UseVisualStyleBackColor = true;
+            this.chkHasAtmosphere.CheckedChanged += new System.EventHandler(this.chkHasAtmosphere_CheckedChanged);
             // 
             // lblSkyColour
             // 
@@ -182,10 +187,16 @@
             // 
             this.cboSkyColour.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cboSkyColour.FormattingEnabled = true;
+            this.cboSkyColour.Items.AddRange(new object[] {
+            "Red",
+            "Green",
+            "Blue"});
             this.cboSkyColour.Location = new System.Drawing.Point(80, 52);
             this.cboSkyColour.Name = "cboSkyColour";
             this.cboSkyColour.Size = new System.Drawing.Size(255, 21);
             this.cboSkyColour.TabIndex = 4;
+            this.cboSkyColour.SelectedIndexChanged += new System.EventHandler(this.cboSkyColour_SelectedIndexChanged);
+            this.cboSkyColour.TextChanged += new System.EventHandler(this.cboSkyColour_TextChanged);
             // 
             // lblNotes
             // 
@@ -207,6 +218,7 @@
             this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtNotes.Size = new System.Drawing.Size(332, 283);
             this.txtNotes.TabIndex = 6;
+            this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
             // 
             // btnSave
             // 
@@ -215,7 +227,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // lblName
@@ -235,6 +247,8 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(255, 20);
             this.txtName.TabIndex = 1;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
+            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
             // 
             // MainForm
             // 
