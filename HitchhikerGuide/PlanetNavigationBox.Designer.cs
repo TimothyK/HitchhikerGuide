@@ -61,6 +61,7 @@
             this.lstNavigation.Location = new System.Drawing.Point(3, 3);
             this.lstNavigation.Name = "lstNavigation";
             this.lstNavigation.Size = new System.Drawing.Size(329, 539);
+            this.lstNavigation.Sorted = true;
             this.lstNavigation.TabIndex = 0;
             this.lstNavigation.SelectedIndexChanged += new System.EventHandler(this.lstNavigation_SelectedIndexChanged);
             // 

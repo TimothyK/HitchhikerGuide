@@ -96,6 +96,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data.Abstractions\Data.Abstractions.csproj">
+      <Project>{e002e680-2e7e-4926-9e3b-27686f191183}</Project>
+      <Name>Data.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.IsolatedStorage\Data.IsolatedStorage.csproj">
+      <Project>{d12ea0c4-d2f3-4996-9839-a76418c9947a}</Project>
+      <Name>Data.IsolatedStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HitchhikerGuideLib\Lib.csproj">
       <Project>{1101de35-3378-44a6-afca-107a4152684d}</Project>
       <Name>Lib</Name>

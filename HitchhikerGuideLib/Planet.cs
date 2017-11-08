@@ -1,16 +1,37 @@
 ﻿using System;
-using System.IO;
-using System.IO.IsolatedStorage;
+using HitchhikerGuide.Data;
 
 namespace HitchhikerGuide
 {
     [Serializable]
-    public class Planet
+    public class Planet : IPlanet
     {
+        private readonly IRepository _repository;
         private string _name;
         private string _skyColour;
 
+        public Planet(IPlanet planet, IRepository repository)
+        {
+            _repository = repository;
+
+            ID = planet.ID;
+            Name = planet.Name;
+            HasAtmosphere = planet.HasAtmosphere;
+            SkyColour = planet.SkyColour;
+            Notes = planet.Notes;
+        }
+
+        public Planet(IRepository repository)
+        {
+            _repository = repository;
+
+            ID = Guid.NewGuid();
+            Name = "<New Planet>";
+        }
+
         public override string ToString() => Name;
+
+        public Guid ID { get; set; }
 
         public string Name
         {
@@ -47,15 +68,7 @@ namespace HitchhikerGuide
 
         public void Save()
         {
-            using (var isoStore = GetStore())
-            using (var fileStream = isoStore.CreateFile(Name + ".xml"))
-            using (var writer = new StreamWriter(fileStream))
-                writer.WriteLine(this.ToSerializedXml());
-
-        }
-        private static IsolatedStorageFile GetStore()
-        {
-            return IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain, null, null);
+            _repository.Save(this);
         }
 
         public event EventHandler NameChanged;

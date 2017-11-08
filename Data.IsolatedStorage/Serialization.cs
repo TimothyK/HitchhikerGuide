@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 
-namespace HitchhikerGuide
+namespace HitchhikerGuide.Data.IsolatedStorage
 {
-    public static class SerializationExtensions
+    internal static class SerializationExtensions
     {
         public static string ToSerializedXml<T>(this T input)
         {

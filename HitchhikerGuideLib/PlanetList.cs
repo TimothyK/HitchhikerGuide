@@ -4,17 +4,23 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using HitchhikerGuide.Data;
 
 namespace HitchhikerGuide
 {
     public class PlanetList : IEnumerable<Planet>
     {
-        public PlanetList()
+        private readonly IRepository _repository;
+
+        public PlanetList(IRepository repository)
         {
-            LoadAllFiles();
+            _repository = repository;
+            _planets = repository.LoadPlanets()
+                .Select(planet => new Planet(planet, repository))
+                .ToList();
         }
 
-        private readonly List<Planet> _planets = new List<Planet>();
+        private readonly List<Planet> _planets;
         private Planet _selectedItem;
 
         public IEnumerator<Planet> GetEnumerator()
@@ -26,41 +32,6 @@ namespace HitchhikerGuide
         {
             return GetEnumerator();
         }
-
-
-
-        private void LoadAllFiles()
-        {
-            using (var isoStore = GetStore())
-                foreach (var fileName in isoStore.GetFileNames())
-                    ReadFile(fileName, isoStore);
-
-            SelectedItem = _planets.FirstOrDefault();
-        }
-
-        private static IsolatedStorageFile GetStore()
-        {
-            return IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain, null, null);
-        }
-
-        private void ReadFile(string fileName, IsolatedStorageFile isoStore)
-        {
-            using (var fileStream = new IsolatedStorageFileStream(fileName, FileMode.Open, isoStore))
-            using (var reader = new StreamReader(fileStream))
-            {
-                var serializedData = reader.ReadToEnd();
-                try
-                {
-                    var planet = serializedData.Deserialize<Planet>();
-                    _planets.Add(planet);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);                    
-                }
-            }
-        }
-
 
         public Planet SelectedItem
         {
@@ -81,7 +52,7 @@ namespace HitchhikerGuide
 
         public void Add()
         {
-            var planet = new Planet { Name = "<New Planet>" };
+            var planet = new Planet(_repository);
 
             _planets.Add(planet);
             OnCollectionChanged(CollectionChangeReason.ItemAdded);
@@ -96,13 +67,8 @@ namespace HitchhikerGuide
                 throw new InvalidOperationException($"{nameof(SelectedItem)} must be set before deleting");
 
             var index = _planets.IndexOf(planet);
-            
-            using (var isoStore = GetStore())
-            {
-                var fileName = planet.Name + ".xml";
-                if (isoStore.FileExists(fileName))
-                    isoStore.DeleteFile(fileName);
-            }
+
+            _repository.Delete(planet);
 
             _planets.Remove(planet);
             OnCollectionChanged(CollectionChangeReason.ItemRemoved);

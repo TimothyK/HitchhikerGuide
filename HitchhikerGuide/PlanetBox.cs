@@ -17,7 +17,7 @@ namespace HitchhikerGuide.WinForms
             private get => _value;
             set
             {
-                _value = value ?? new Planet();
+                _value = value ?? new Planet(Program.Repository);
 
                 txtName.Text = _value.Name;
                 txtName.SelectAll();

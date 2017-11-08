@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+using HitchhikerGuide.Data;
+using HitchhikerGuide.Data.IsolatedStorage;
 using HitchhikerGuide.WinForms;
 
 namespace HitchhikerGuide
 {
-    static class Program
+    internal static class Program
     {
+        public static readonly IRepository Repository = new Repository();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
