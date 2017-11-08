@@ -21,7 +21,7 @@ namespace HitchhikerGuide.Data.IsolatedStorage
         }
 
 
-        private static IsolatedStorageFile GetStore()
+        public static IsolatedStorageFile GetStore()
         {
             return IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain, null, null);
         }

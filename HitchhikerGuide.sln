@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Abstractions", "Data.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.IsolatedStorage", "Data.IsolatedStorage\Data.IsolatedStorage.csproj", "{D12EA0C4-D2F3-4996-9839-A76418C9947A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Tests", "Lib.Tests\Lib.Tests.csproj", "{A34C0B7D-C22D-4842-8281-54C838CF38AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.IsolatedStorage.Tests", "Data.IsolatedStorage.Tests\Data.IsolatedStorage.Tests.csproj", "{FEB3321A-5F24-4209-BEC8-34859177E04D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{D12EA0C4-D2F3-4996-9839-A76418C9947A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D12EA0C4-D2F3-4996-9839-A76418C9947A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D12EA0C4-D2F3-4996-9839-A76418C9947A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A34C0B7D-C22D-4842-8281-54C838CF38AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A34C0B7D-C22D-4842-8281-54C838CF38AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A34C0B7D-C22D-4842-8281-54C838CF38AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A34C0B7D-C22D-4842-8281-54C838CF38AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEB3321A-5F24-4209-BEC8-34859177E04D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB3321A-5F24-4209-BEC8-34859177E04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB3321A-5F24-4209-BEC8-34859177E04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB3321A-5F24-4209-BEC8-34859177E04D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
