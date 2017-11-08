@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Xml.Serialization;
 
 namespace HitchhikerGuide
 {
-    static class SerializationExtensions
+    public static class SerializationExtensions
     {
         public static string ToSerializedXml<T>(this T input)
         {
