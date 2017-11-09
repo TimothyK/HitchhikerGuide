@@ -3,7 +3,7 @@ using HitchhikerGuide.Data;
 
 namespace HitchhikerGuide
 {
-    [Serializable]
+ 
     public class Planet : IPlanet
     {
         private readonly IRepository _repository;
