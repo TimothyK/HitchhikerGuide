@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using HitchhikerGuide.Data;
-using HitchhikerGuide.Data.IsolatedStorage;
+using HitchhikerGuide.Data.PublisherClient;
 using HitchhikerGuide.WinForms;
 
 namespace HitchhikerGuide

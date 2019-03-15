@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="https://services.github.com/TimothyK/HitchhikerGuide/Publisher" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PublisherService" targetNamespace="https://services.github.com/TimothyK/HitchhikerGuide/Publisher" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/Imports">
+      <xsd:import namespace="https://services.github.com/TimothyK/HitchhikerGuide/Publisher" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/PublisherService.Service" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPublisher_UpdatePlanet_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlanet" />
+  </wsdl:message>
+  <wsdl:message name="IPublisher_UpdatePlanet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlanetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPublisher_GetPlanets_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlanets" />
+  </wsdl:message>
+  <wsdl:message name="IPublisher_GetPlanets_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlanetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPublisher_DeletePlanet_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePlanet" />
+  </wsdl:message>
+  <wsdl:message name="IPublisher_DeletePlanet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePlanetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPublisher">
+    <wsdl:operation name="UpdatePlanet">
+      <wsdl:input wsam:Action="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/UpdatePlanet" message="tns:IPublisher_UpdatePlanet_InputMessage" />
+      <wsdl:output wsam:Action="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/UpdatePlanetResponse" message="tns:IPublisher_UpdatePlanet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanets">
+      <wsdl:input wsam:Action="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/GetPlanets" message="tns:IPublisher_GetPlanets_InputMessage" />
+      <wsdl:output wsam:Action="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/GetPlanetsResponse" message="tns:IPublisher_GetPlanets_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePlanet">
+      <wsdl:input wsam:Action="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/DeletePlanet" message="tns:IPublisher_DeletePlanet_InputMessage" />
+      <wsdl:output wsam:Action="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/DeletePlanetResponse" message="tns:IPublisher_DeletePlanet_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IPublisher" type="tns:IPublisher">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UpdatePlanet">
+      <soap:operation soapAction="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/UpdatePlanet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanets">
+      <soap:operation soapAction="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/GetPlanets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePlanet">
+      <soap:operation soapAction="https://services.github.com/TimothyK/HitchhikerGuide/Publisher/IPublisher/DeletePlanet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PublisherService">
+    <wsdl:port name="BasicHttpBinding_IPublisher" binding="tns:BasicHttpBinding_IPublisher">
+      <soap:address location="http://localhost:1234/IPublisher" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
