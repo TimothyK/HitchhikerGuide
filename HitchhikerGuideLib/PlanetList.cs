@@ -13,12 +13,30 @@ namespace HitchhikerGuide
         public PlanetList(IRepository repository)
         {
             _repository = repository;
-            _planets = repository.LoadPlanets()
-                .Select(planet => new Planet(planet, repository))
-                .ToList();
+            Refresh();
         }
 
-        private readonly List<Planet> _planets;
+        public void Refresh()
+        {
+            IEnumerable<IPlanet> planets;
+            try
+            {
+                planets = _repository.LoadPlanets();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString()); //TODO: add error reporting
+                planets = Enumerable.Empty<IPlanet>();
+            }
+
+            _planets = planets
+                .Select(planet => new Planet(planet, _repository))
+                .ToList();
+
+            OnCollectionChanged(CollectionChangeReason.Refresh);
+        }
+
+        private List<Planet> _planets;
         private Planet _selectedItem;
 
         public IEnumerator<Planet> GetEnumerator()

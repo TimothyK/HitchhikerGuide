@@ -90,14 +90,20 @@ namespace HitchhikerGuide.WinForms
 
         #region Buttons
 
-        private void btnAdd_Click(object sender, EventArgs e)
+
+        private void tsmiAddPlanet_Click(object sender, EventArgs e)
         {
             _planetList.Add();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void tsmiDeletePlanet_Click(object sender, EventArgs e)
         {
             _planetList.Delete();
+        }
+
+        private void tsmiRefresh_Click(object sender, EventArgs e)
+        {
+            _planetList.Refresh();
         }
 
         #endregion

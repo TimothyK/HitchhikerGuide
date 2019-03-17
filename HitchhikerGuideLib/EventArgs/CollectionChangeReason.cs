@@ -3,6 +3,7 @@
     public enum CollectionChangeReason
     {
         ItemAdded,
-        ItemRemoved
+        ItemRemoved,
+        Refresh
     }
 }
