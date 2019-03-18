@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using Serilog;
+using Serilog.Context;
 
 namespace PublisherService.Service
 {
@@ -13,29 +15,47 @@ namespace PublisherService.Service
 
         public void UpdatePlanet(Guid requestId, string author, Planet planet)
         {
-            var oldPlanet = _planets.FirstOrDefault(p => p.ID == planet.ID);
+            using (LogContext.PushProperty("RequestId", requestId))
+            using (LogContext.PushProperty("PlanetId", planet.ID))
+            {
+                var oldPlanet = _planets.FirstOrDefault(p => p.ID == planet.ID);
 
-            var rate = oldPlanet == null ? 10 : 5;
-            PayTheAuthor(author, rate, planet);
+                var rate = oldPlanet == null ? 10 : 5;
+                PayTheAuthor(author, rate, planet);
 
-            if (oldPlanet != null)
-                _planets.Remove(oldPlanet);
-            _planets.Add(planet);
+                if (oldPlanet != null)
+                    _planets.Remove(oldPlanet);
+                _planets.Add(planet);
+            }
         }
 
         private static void PayTheAuthor(string author, int rate, Planet planet)
         {
-            Console.WriteLine($"Paid {author} ${rate} for update to {planet.Name}");
+            Log.Information("Paid {author} ${rate} for update to {PlanetName}", author, rate, planet.Name);
         }
 
-        public IEnumerable<Planet> GetPlanets(Guid requestId) => _planets;
+        public IEnumerable<Planet> GetPlanets(Guid requestId)
+        {
+            using (LogContext.PushProperty("RequestId", requestId))
+            {
+                Log.Information("Returning {Count} planets", _planets.Count);
+
+                return _planets;
+            }
+        }
 
         public void DeletePlanet(Guid requestId, Planet planet)
         {
-            var oldPlanet = _planets.FirstOrDefault(p => p.ID == planet.ID);
+            using (LogContext.PushProperty("RequestId", requestId))
+            using (LogContext.PushProperty("PlanetId", planet.ID))
+            {
+                Log.Information("Deleting {PlanetName}", planet.Name);
 
-            if (oldPlanet != null)
-                _planets.Remove(oldPlanet);
+                var oldPlanet = _planets.FirstOrDefault(p => p.ID == planet.ID);
+
+                if (oldPlanet != null)
+                    _planets.Remove(oldPlanet);
+            }
         }
     }
 }

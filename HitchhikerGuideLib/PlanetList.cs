@@ -1,8 +1,9 @@
-﻿using System;
+﻿using HitchhikerGuide.Data;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HitchhikerGuide.Data;
 
 namespace HitchhikerGuide
 {
@@ -10,26 +11,15 @@ namespace HitchhikerGuide
     {
         private readonly IRepository _repository;
 
-        public PlanetList(IRepository repository)
+        public PlanetList(IRepository repository, ILoggerFactory loggerFactory)
         {
-            _repository = repository;
+            _repository = new LoggingDecoratorRepository(repository, loggerFactory);
             Refresh();
         }
 
         public void Refresh()
         {
-            IEnumerable<IPlanet> planets;
-            try
-            {
-                planets = _repository.LoadPlanets();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString()); //TODO: add error reporting
-                planets = Enumerable.Empty<IPlanet>();
-            }
-
-            _planets = planets
+            _planets = _repository.LoadPlanets()
                 .Select(planet => new Planet(planet, _repository))
                 .ToList();
 

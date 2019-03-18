@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using PublisherService.Service;
 using PublisherService.Utilities;
+using Serilog;
 
 namespace PublisherService
 {
@@ -12,6 +15,9 @@ namespace PublisherService
     {
         static void Main(string[] args)
         {
+            InitializeLogging();
+            Log.Information("Starting Publisher Service");
+
             Console.WriteLine("Starting Publisher Service...");
 
             var server = new Service.PublisherService();
@@ -39,5 +45,22 @@ namespace PublisherService
             Console.ReadKey();
 
         }
+
+        private static void InitializeLogging()
+        {
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .Enrich.WithMachineName()
+                .Enrich.WithEnvironmentUserName()
+                .Enrich.WithProcessId()
+                .Enrich.WithThreadId()
+                .Enrich.WithAssemblyName()
+                .Enrich.WithAssemblyVersion()
+                .WriteTo.Console()
+                .WriteTo.Seq("http://localhost:5341")
+                .CreateLogger();
+
+        }
+
     }
 }

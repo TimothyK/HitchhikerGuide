@@ -13,7 +13,7 @@ namespace HitchhikerGuide.WinForms
         {
             InitializeComponent();
 
-            _planetList = new PlanetList(Program.Repository);
+            _planetList = new PlanetList(Program.Repository, Program.LoggerFactory);
             _planetList.CollectionChanged += PlanetListChanged;
             _planetList.SelectedPlanetChanged += SelectedPlanetChanged;
 

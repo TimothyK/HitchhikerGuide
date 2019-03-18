@@ -1,9 +1,10 @@
-﻿using System;
-using HitchhikerGuide.Data;
+﻿using HitchhikerGuide.Data;
+using System;
+using System.Diagnostics;
 
 namespace HitchhikerGuide
 {
- 
+
     public class Planet : IPlanet
     {
         private readonly IRepository _repository;
