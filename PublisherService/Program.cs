@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using PublisherService.Service;
 using PublisherService.Utilities;
 using Serilog;
+using Serilog.Events;
 
 namespace PublisherService
 {
@@ -49,6 +50,7 @@ namespace PublisherService
         private static void InitializeLogging()
         {
             Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
                 .Enrich.WithEnvironmentUserName()
@@ -56,7 +58,7 @@ namespace PublisherService
                 .Enrich.WithThreadId()
                 .Enrich.WithAssemblyName()
                 .Enrich.WithAssemblyVersion()
-                .WriteTo.Console()
+                .WriteTo.Console(LogEventLevel.Information)
                 .WriteTo.Seq("http://localhost:5341")
                 .CreateLogger();
 

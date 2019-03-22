@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace HitchhikerGuide
@@ -38,6 +37,7 @@ namespace HitchhikerGuide
                 , "{Date} Hitchhiker.log");
 
             Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
                 .Enrich.WithEnvironmentUserName()

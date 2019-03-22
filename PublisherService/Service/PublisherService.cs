@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Timers;
 using Serilog;
 using Serilog.Context;
 
@@ -12,6 +13,23 @@ namespace PublisherService.Service
     public class PublisherService : IPublisher
     {
         private readonly List<Planet> _planets = new List<Planet>();
+
+        public PublisherService()
+        {
+            var timer = new Timer(TimeSpan.FromSeconds(3).TotalMilliseconds);
+            timer.Elapsed += AuditPlanets;
+            timer.Start();
+        }
+
+        private void AuditPlanets(object sender, ElapsedEventArgs e)
+        {
+            Log.Information("Reporting the number of planets");
+
+            var processCount = System.Diagnostics.Process.GetProcesses().Length;
+            Log.Debug("There are {ProcessCount} competing processes running on this computer.", processCount-1);
+
+            Log.Information("There are {PlanetCount} planets", _planets.Count);
+        }
 
         public void UpdatePlanet(Guid requestId, string author, Planet planet)
         {
